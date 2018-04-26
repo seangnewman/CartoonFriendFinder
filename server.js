@@ -14,10 +14,8 @@ var path = require("path");
 
 // Tells node that we are creating an "express" server
 var app = express();
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/resources')));
-app.use(express.static(path.join(__dirname, 'public/resources/css')));
-app.use(express.static(path.join(__dirname, 'public/resources/images')));
+app.use(express.static('public'));
+
 // Sets an initial port. We"ll use this later in our listener
 var PORT = process.env.PORT || 8081;
 

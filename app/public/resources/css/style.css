@@ -5,17 +5,25 @@ html{
     margin: 0 auto;
   }
 .homeBackground{
-  background: url("../images/background.jpg") no-repeat center center fixed;
+  background: url("background.jpg") no-repeat center center fixed;
   background-size: cover;
-  height: 40rem;
+  
   color:white;
+
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .themeTitle{
-    position: relative;
+    position: fixed;
     width: 8rem;
     height: 5rem;
-    top: 20%;
+    top: 15%;
     left: 20%;
      
     font-family: 'Courgette', cursive;
@@ -27,8 +35,9 @@ html{
 }
 
 .mainTitle{
-    position: relative;
-    top: 40%;
+    position: fixed;
+    top: 50%;
+    left: 10%;
     font-size: 3rem;
     font-weight: 700;
     text-align: center;
