@@ -19,6 +19,13 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/survey.html"));
   });
 
+  
+  app.get("*.js", function(req, res) {
+    var jsParam = req.params[0];
+    console.log(jsParam);
+    res.sendFile(path.join(__dirname, "../public/resources/js/" + jsParam + ".js" ));
+  });
+
   app.get("*.css", function(req, res) {
     var cssParam = req.params[0];
      
@@ -27,7 +34,7 @@ module.exports = function(app) {
  
   app.get("*.jpg", function(req, res) {
     var imageParam = req.params[0];
-    console.log(imageParam); 
+      
     res.sendFile(path.join(__dirname, "../public/resources/images/" + imageParam + ".jpg" ));
   });
 
