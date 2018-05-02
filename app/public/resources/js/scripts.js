@@ -40,19 +40,24 @@ $(document).ready(function(){
     var cartoonObjectArray;
     getCharacterData(yourObject);
 
+    //Damn, forgot the modal box
+
+    $('.close').on("click", function(e){
+      $('.modal').hide();//
+    });
+ 
     //Now let's push the new object
     $.post("/api/friends", yourObject,
-        function(data) {
-          //Received a response,  
-          if (data) {
-            console.log("Your Character Successfully pushed!");
-
-          }
-          // Response failed
-          else {
-            alert("Unsuccesful post");
-          }
-        });
+      function(data) {
+      //Received a response,  
+      if (data) {
+        console.log("Your Character Successfully pushed!");
+      }
+     // Response failed
+     else {
+      alert("Unsuccesful post");
+    }
+    });
      
 
   });
@@ -76,8 +81,6 @@ function getCharacterData(theObject) {
   var temp =  $.ajax({ url:"/api/friends", method: "GET" })
     .then(function(friendData) {
       var compArray = [];     //Array of Comparison Objects
-       
-       
       // For each item in the friend array
        for(var i = 0; i < friendData.length; i++){
            var tempArray = [];
@@ -114,6 +117,9 @@ function getCharacterData(theObject) {
     //Now the array is sorted, choose the top 3 to fill the results with 
     $('#topMatch h4').text(friendData[compArray[0].index].name);
     $('#topMatch').css("background",'url(' + friendData[compArray[0].index].photo + ') no-repeat center' );
+    $('#bestMatch h4').text(friendData[compArray[0].index].name);
+    $('#bestMatch').css("background",'url(' + friendData[compArray[0].index].photo + ') no-repeat center' );
+    
     $('#alternativeOne h4').text(friendData[compArray[1].index].name);
     $('#alternativeOne').css("background",'url(' + friendData[compArray[1].index].photo + ') no-repeat center' );
     $('#alternativeTwo h4').text(friendData[compArray[2].index].name);
@@ -127,9 +133,11 @@ function getCharacterData(theObject) {
     $('.favoriteCharacters').show(1000);
     $('#yourName').text("");
     $('#yourURL').text("");
-
-    //Now let's add the current user to the characterObject
-
+    
+     
+     
+    //modal.style.display = "block";
+    $('.modal').css("display", "block");
          
          
     });
