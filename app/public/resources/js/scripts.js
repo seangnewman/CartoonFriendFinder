@@ -76,26 +76,41 @@ function getCharacterData(theObject) {
   var temp =  $.ajax({ url:"/api/friends", method: "GET" })
     .then(function(friendData) {
       var compArray = [];     //Array of Comparison Objects
-        
-      //First find sum of your object
-      var characterArraySum = theObject.scores.reduce(function(accumulator, value){
-        return accumulator + value;
-      });
+       
+       
+      // For each item in the friend array
+       for(var i = 0; i < friendData.length; i++){
+           var tempArray = [];
+           console.log("In outer loop " + i);
+           //For each element in the friend array
+           for(var j=0; j < friendData[i].scores.length; j++){
+            console.log("In middle loop " + j);
+               var tempScore = Math.abs(friendData[i].scores[j] - theObject.scores[j]);
+               console.log("the value is " + tempScore);
+               tempArray.push(tempScore);
+           }
 
-      //For each cartoon object find the scores and subtract the sum
-      for(var i = 0; i < friendData.length; i++){
-        var cartoonArraySum = friendData[i].scores.reduce(function(accumulator, value){
-          return accumulator + value;
-      });
-            
-      compArray.push({index: i, difference: Math.abs(cartoonArraySum - characterArraySum)});
-    }
+           //Now lets sum the Array
+           var characterArraySum = tempArray.reduce(function(accumulator, value){
+            return accumulator + value;
+          });
+           compArray.push({index: i, difference:  characterArraySum});
+       }
+    
+    //Now lets add the    
+
+    console.log(compArray);  
+
+
+     //let's sum all values in the array
+   
     
     //Now sort the array in descending order
     compArray.sort(function(a,b){
       return a.difference - b.difference;
     });
      
+    console.log(compArray);
     //Now the array is sorted, choose the top 3 to fill the results with 
     $('#topMatch h4').text(friendData[compArray[0].index].name);
     $('#topMatch').css("background",'url(' + friendData[compArray[0].index].photo + ') no-repeat center' );
