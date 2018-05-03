@@ -46,18 +46,7 @@ $(document).ready(function(){
       $('.modal').hide();//
     });
  
-    //Now let's push the new object
-    $.post("/api/friends", yourObject,
-      function(data) {
-      //Received a response,  
-      if (data) {
-        console.log("Your Character Successfully pushed!");
-      }
-     // Response failed
-     else {
-      alert("Unsuccesful post");
-    }
-    });
+    
      
 
   });
@@ -138,7 +127,19 @@ function getCharacterData(theObject) {
      
     //modal.style.display = "block";
     $('.modal').css("display", "block");
-         
+    
+    //Now let's push the new object
+    $.post("/api/friends", theObject,
+      function(data) {
+      //Received a response,  
+      if (data) {
+        console.log("Your Character Successfully pushed!");
+      }
+     // Response failed
+     else {
+      alert("Unsuccesful post");
+    }
+    });
          
     });
 
